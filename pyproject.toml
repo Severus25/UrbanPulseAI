@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "urbanpulse-ai"
+version = "0.1.0"
+description = "A Multimodal City Digital Twin for Traffic, Transit, Weather, and Risk-Aware Mobility"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "UrbanPulse Team"}
+]
+
+dependencies = [
+    # Web framework
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.27.0",
+    "websockets>=12.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    
+    # Database
+    "sqlalchemy>=2.0.25",
+    "asyncpg>=0.29.0",
+    "geoalchemy2>=0.14.0",
+    "alembic>=1.13.0",
+    "redis>=5.0.0",
+    
+    # Kafka
+    "confluent-kafka>=2.3.0",
+    
+    # ML / Data Science
+    "numpy>=1.26.0",
+    "pandas>=2.1.0",
+    "scikit-learn>=1.4.0",
+    "xgboost>=2.0.0",
+    "torch>=2.2.0",
+    "pytorch-lightning>=2.1.0",
+    
+    # Geospatial
+    "geopandas>=0.14.0",
+    "shapely>=2.0.0",
+    "pyproj>=3.6.0",
+    "osmnx>=1.8.0",
+    
+    # Computer Vision
+    "opencv-python>=4.9.0",
+    "ultralytics>=8.1.0",  # YOLOv8
+    
+    # LLM / Agents
+    "langchain>=0.2.0",
+    "langgraph>=0.1.0",
+    "langchain-openai>=0.1.0",
+    "chromadb>=0.4.22",
+    
+    # Observability
+    "opentelemetry-api>=1.22.0",
+    "opentelemetry-sdk>=1.22.0",
+    "opentelemetry-instrumentation-fastapi>=0.43b0",
+    "prometheus-client>=0.20.0",
+    "structlog>=24.1.0",
+    
+    # Utilities
+    "httpx>=0.26.0",
+    "python-dotenv>=1.0.0",
+    "orjson>=3.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.2.0",
+    "mypy>=1.8.0",
+    "pre-commit>=3.6.0",
+    "ipython>=8.20.0",
+    "jupyter>=1.0.0",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "S", "B", "A", "COM", "C4", "DTZ", "T20", "ICN"]
+ignore = ["S101", "COM812"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["urbanpulse"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true

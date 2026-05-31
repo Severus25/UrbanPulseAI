@@ -1,0 +1,36 @@
+# Prometheus configuration for UrbanPulse AI
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alerts.yml"
+
+scrape_configs:
+  - job_name: "data-gateway"
+    static_configs:
+      - targets: ["data-gateway:8000"]
+    metrics_path: /metrics
+
+  - job_name: "inference"
+    static_configs:
+      - targets: ["inference:8000"]
+    metrics_path: /metrics
+
+  - job_name: "orchestration"
+    static_configs:
+      - targets: ["orchestration:8000"]
+    metrics_path: /metrics
+
+  - job_name: "kafka"
+    static_configs:
+      - targets: ["kafka:9092"]
+
+  - job_name: "postgres"
+    static_configs:
+      - targets: ["postgres-exporter:9187"]
+
+  - job_name: "redis"
+    static_configs:
+      - targets: ["redis-exporter:9121"]

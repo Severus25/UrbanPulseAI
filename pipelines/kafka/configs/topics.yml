@@ -1,0 +1,59 @@
+# Kafka Topic Configuration for UrbanPulse AI
+
+topics:
+  # Real-time traffic speed updates per road segment
+  - name: traffic.speed.realtime
+    partitions: 12
+    replication_factor: 1
+    config:
+      retention.ms: 86400000  # 24 hours
+      cleanup.policy: delete
+
+  # Traffic incidents and anomalies
+  - name: traffic.incidents
+    partitions: 6
+    replication_factor: 1
+    config:
+      retention.ms: 604800000  # 7 days
+
+  # Weather updates
+  - name: weather.forecast
+    partitions: 3
+    replication_factor: 1
+    config:
+      retention.ms: 86400000
+
+  # Weather alerts
+  - name: weather.alerts
+    partitions: 3
+    replication_factor: 1
+    config:
+      retention.ms: 604800000
+
+  # Transit delay updates (GTFS-RT)
+  - name: transit.delays
+    partitions: 6
+    replication_factor: 1
+    config:
+      retention.ms: 86400000
+
+  # Camera frame analysis results
+  - name: vision.analysis
+    partitions: 6
+    replication_factor: 1
+    config:
+      retention.ms: 43200000  # 12 hours
+
+  # Risk score updates
+  - name: risk.scores
+    partitions: 6
+    replication_factor: 1
+    config:
+      retention.ms: 86400000
+
+  # AI agent query results (for async processing)
+  - name: agent.responses
+    partitions: 6
+    replication_factor: 1
+    config:
+      retention.ms: 3600000  # 1 hour
